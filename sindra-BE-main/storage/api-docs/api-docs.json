@@ -1,0 +1,1305 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Sindra API Documentation",
+        "description": "Dokumentasi API untuk sistem tiket & knowledge base",
+        "contact": {
+            "email": "support@sindra.local"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000",
+            "description": "Main API Server"
+        }
+    ],
+    "paths": {
+        "/api/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Ambil semua kategori",
+                "description": "Mengambil daftar semua kategori yang ada di sistem.",
+                "operationId": "ac9c4d978ea4e5b72915ca9728e5b8b1",
+                "responses": {
+                    "200": {
+                        "description": "Daftar kategori berhasil diambil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Daftar kategori berhasil diambil."
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Category"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Buat kategori baru",
+                "description": "Menambahkan kategori baru ke sistem.",
+                "operationId": "cca49a87d9b0ebb9a98ad7c154b71737",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Teknologi"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Kategori untuk artikel teknologi"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Kategori berhasil dibuat",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Kategori berhasil dibuat."
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Category"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            }
+        },
+        "/api/categories/{id}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Tampilkan kategori berdasarkan ID",
+                "description": "Mengambil detail kategori berdasarkan ID.",
+                "operationId": "09767bb2e47dde77dd1e2591428b0ae1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID kategori",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Data kategori ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Category"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Kategori tidak ditemukan"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Update kategori",
+                "description": "Memperbarui data kategori berdasarkan ID.",
+                "operationId": "7dcf71887e585de7f881e9eb98d86126",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID kategori",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Teknologi Modern"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Update kategori teknologi"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Kategori berhasil diperbarui",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Kategori berhasil diperbarui."
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Category"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Kategori tidak ditemukan"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Hapus kategori",
+                "description": "Menghapus kategori berdasarkan ID.",
+                "operationId": "9b61b65823f4a21f182506b34ddf805c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID kategori",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Kategori berhasil dihapus",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Kategori berhasil dihapus."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Kategori tidak ditemukan"
+                    }
+                }
+            }
+        },
+        "/api/faqs": {
+            "get": {
+                "tags": [
+                    "FAQs"
+                ],
+                "summary": "Tampilkan semua FAQ",
+                "description": "Mengambil semua data FAQ yang tersedia.",
+                "operationId": "1cf6a38b9bfb7aa285a9c5c6657be48c",
+                "responses": {
+                    "200": {
+                        "description": "Daftar FAQ berhasil diambil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Daftar FAQ berhasil diambil."
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Faq"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "FAQs"
+                ],
+                "summary": "Buat FAQ baru",
+                "description": "Menambahkan FAQ baru ke sistem.",
+                "operationId": "a8788f6bdc2b28153abf26ce09976903",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "question"
+                                ],
+                                "properties": {
+                                    "question": {
+                                        "type": "string",
+                                        "example": "Bagaimana cara reset password?"
+                                    },
+                                    "answer": {
+                                        "type": "string",
+                                        "example": "Anda dapat mereset password melalui menu profil."
+                                    },
+                                    "is_published": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "FAQ berhasil dibuat",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "FAQ berhasil dibuat."
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Faq"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/faqs/{id}": {
+            "get": {
+                "tags": [
+                    "FAQs"
+                ],
+                "summary": "Tampilkan satu FAQ",
+                "description": "Mengambil satu FAQ berdasarkan ID.",
+                "operationId": "937cbd01aaba46aaec787b0489e2df79",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID FAQ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "FAQ ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Faq"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "FAQ tidak ditemukan"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "FAQs"
+                ],
+                "summary": "Perbarui FAQ",
+                "description": "Memperbarui data FAQ berdasarkan ID.",
+                "operationId": "5dd1be50e3d579b2872adec93cc07593",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID FAQ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "question"
+                                ],
+                                "properties": {
+                                    "question": {
+                                        "type": "string",
+                                        "example": "Bagaimana cara login?"
+                                    },
+                                    "answer": {
+                                        "type": "string",
+                                        "example": "Gunakan email dan password yang terdaftar."
+                                    },
+                                    "is_published": {
+                                        "type": "boolean",
+                                        "example": false
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "FAQ berhasil diperbarui",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "FAQ berhasil diperbarui."
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Faq"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "FAQ tidak ditemukan"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "FAQs"
+                ],
+                "summary": "Hapus FAQ",
+                "description": "Menghapus FAQ berdasarkan ID.",
+                "operationId": "0f53ce1b443d43edda00d2f0a4d3c105",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID FAQ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "FAQ berhasil dihapus"
+                    },
+                    "404": {
+                        "description": "FAQ tidak ditemukan"
+                    }
+                }
+            }
+        },
+        "/api/knowledge-bases": {
+            "get": {
+                "tags": [
+                    "Knowledge Base"
+                ],
+                "summary": "Tampilkan semua Knowledge Base",
+                "description": "Ambil daftar Knowledge Base dengan filter opsional berdasarkan kategori, status publikasi, atau pencarian judul.",
+                "operationId": "47e61c307a4996fd7ddeae803829a766",
+                "parameters": [
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "Filter berdasarkan kategori",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 2
+                        }
+                    },
+                    {
+                        "name": "is_published",
+                        "in": "query",
+                        "description": "Filter berdasarkan status publikasi (true/false)",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "example": true
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Cari berdasarkan judul",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "Panduan Reset Password"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Daftar Knowledge Base berhasil diambil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Daftar knowledge base berhasil diambil."
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/KnowledgeBase"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Knowledge Base"
+                ],
+                "summary": "Buat Knowledge Base baru",
+                "description": "Menambahkan artikel baru ke knowledge base.",
+                "operationId": "35d70b37c4c167e0c35fb92c96e2bbe8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "author_id",
+                                    "title"
+                                ],
+                                "properties": {
+                                    "author_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Panduan Menggunakan Aplikasi"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "example": "Langkah-langkah penggunaan aplikasi dijelaskan di sini."
+                                    },
+                                    "is_published": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Knowledge Base berhasil dibuat",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Knowledge base berhasil dibuat."
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/KnowledgeBase"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/knowledge-bases/{id}": {
+            "get": {
+                "tags": [
+                    "Knowledge Base"
+                ],
+                "summary": "Tampilkan detail Knowledge Base",
+                "description": "Menampilkan satu Knowledge Base berdasarkan ID.",
+                "operationId": "4ef4dc9b23a5b94cb499c429b1928ae0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID Knowledge Base",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Knowledge Base ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/KnowledgeBase"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Knowledge Base tidak ditemukan"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Knowledge Base"
+                ],
+                "summary": "Perbarui Knowledge Base",
+                "description": "Memperbarui artikel knowledge base berdasarkan ID.",
+                "operationId": "8430503bffb894aee0340672dc6f120f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID Knowledge Base",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title"
+                                ],
+                                "properties": {
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Panduan Update Akun"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "example": "Cara memperbarui data akun pengguna."
+                                    },
+                                    "is_published": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Knowledge Base berhasil diperbarui",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Knowledge base berhasil diperbarui."
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/KnowledgeBase"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Knowledge Base tidak ditemukan"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Knowledge Base"
+                ],
+                "summary": "Hapus Knowledge Base",
+                "description": "Menghapus artikel Knowledge Base berdasarkan ID.",
+                "operationId": "872d8cade6d0b30f8adc33a3352a8060",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID Knowledge Base",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Knowledge Base berhasil dihapus"
+                    },
+                    "404": {
+                        "description": "Knowledge Base tidak ditemukan"
+                    }
+                }
+            }
+        },
+        "/api/tickets": {
+            "get": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Ambil semua tiket",
+                "description": "Menampilkan semua tiket beserta relasi reporter, assignees, dan attachments",
+                "operationId": "ddc3a5e66a83482e874c84e71ebc4505",
+                "responses": {
+                    "200": {
+                        "description": "Daftar tiket berhasil diambil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Ticket"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Buat tiket baru",
+                "description": "Membuat tiket pengaduan baru lengkap dengan assignee dan attachment",
+                "operationId": "2a7d76295d0f9f3e0e63adb2ed4a0596",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "asset_uuid",
+                                    "reporter_id",
+                                    "title"
+                                ],
+                                "properties": {
+                                    "asset_uuid": {
+                                        "type": "string",
+                                        "example": "b2b1a570-4e24-4ac7-a1bb-4e58a6c9471d"
+                                    },
+                                    "reporter_id": {
+                                        "type": "integer",
+                                        "example": 10
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Printer tidak menyala"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Printer Epson rusak di ruang 201"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "enum": [
+                                            "open",
+                                            "in_progress",
+                                            "resolved",
+                                            "closed"
+                                        ],
+                                        "example": "open"
+                                    },
+                                    "assignees[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "example": 5
+                                        }
+                                    },
+                                    "attachments[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tiket berhasil dibuat",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ticket"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            }
+        },
+        "/api/tickets/{id}": {
+            "get": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Detail tiket",
+                "description": "Menampilkan detail lengkap tiket berdasarkan ID termasuk reporter, assignees, attachments, dan discussions",
+                "operationId": "da5292e25da44db69ed981a43357753c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID tiket",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detail tiket berhasil diambil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ticket"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tiket tidak ditemukan"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Perbarui tiket",
+                "description": "Update judul, deskripsi, status, assignees, atau upload attachment baru",
+                "operationId": "d4df6fbeb974e6e967aa95efe991e538",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID tiket yang akan diupdate",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Printer mati total"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Sudah dicek kabel dan tombol power"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "enum": [
+                                            "open",
+                                            "in_progress",
+                                            "resolved",
+                                            "closed"
+                                        ],
+                                        "example": "in_progress"
+                                    },
+                                    "assignees[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "example": 8
+                                        }
+                                    },
+                                    "attachments[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Tiket berhasil diperbarui",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ticket"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tiket tidak ditemukan"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Hapus tiket",
+                "description": "Menghapus tiket beserta semua file attachment-nya",
+                "operationId": "927b925c2e99540b159ffabb3a8c11c0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID tiket yang ingin dihapus",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tiket berhasil dihapus"
+                    },
+                    "404": {
+                        "description": "Tiket tidak ditemukan"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Category": {
+                "title": "Category",
+                "description": "Data kategori",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Teknologi"
+                    },
+                    "slug": {
+                        "type": "string",
+                        "example": "teknologi"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Kategori artikel seputar teknologi terbaru"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-10-15T09:00:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-10-15T09:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Faq": {
+                "title": "FAQ",
+                "description": "Schema untuk entitas FAQ",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "question": {
+                        "type": "string",
+                        "example": "Bagaimana cara reset password?"
+                    },
+                    "answer": {
+                        "type": "string",
+                        "example": "Klik menu lupa password di halaman login."
+                    },
+                    "is_published": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-10-15T08:00:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-10-15T08:30:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "KnowledgeBase": {
+                "title": "Knowledge Base",
+                "description": "Schema untuk entitas Knowledge Base",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "author_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "category_id": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Panduan Menggunakan Sistem"
+                    },
+                    "slug": {
+                        "type": "string",
+                        "example": "panduan-menggunakan-sistem"
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "Berikut panduan lengkap untuk menggunakan sistem."
+                    },
+                    "is_published": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "published_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-10-15T10:00:00Z"
+                    },
+                    "category": {
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "example": 2
+                            },
+                            "name": {
+                                "type": "string",
+                                "example": "Panduan Sistem"
+                            }
+                        },
+                        "type": "object",
+                        "nullable": true
+                    },
+                    "author": {
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "name": {
+                                "type": "string",
+                                "example": "Admin Utama"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "Ticket": {
+                "title": "Ticket",
+                "description": "Data tiket pengaduan",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "asset_uuid": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "e7b8d2a9-1f4b-4e90-9a61-bd7e93e56a12"
+                    },
+                    "reporter_id": {
+                        "type": "integer",
+                        "example": 5
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Kerusakan Laptop"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Layar laptop pecah setelah digunakan."
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "open",
+                            "in_progress",
+                            "resolved",
+                            "closed"
+                        ],
+                        "example": "open"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-10-15T08:30:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-10-15T10:00:00Z"
+                    },
+                    "assignees": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer",
+                                    "example": 3
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "example": "Budi Hartono"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "file_name": {
+                                    "type": "string",
+                                    "example": "bukti-foto.jpg"
+                                },
+                                "file_path": {
+                                    "type": "string",
+                                    "example": "storage/tickets/bukti-foto.jpg"
+                                },
+                                "mime_type": {
+                                    "type": "string",
+                                    "example": "image/jpeg"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Categories",
+            "description": "Categories"
+        },
+        {
+            "name": "FAQs",
+            "description": "FAQs"
+        },
+        {
+            "name": "Knowledge Base",
+            "description": "Knowledge Base"
+        },
+        {
+            "name": "Tickets",
+            "description": "Tickets"
+        }
+    ]
+}
